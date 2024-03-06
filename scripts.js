@@ -26,11 +26,10 @@ const createUser = async (event) => {
 
 const userLogin = async (event) => {
   event.preventDefault();
+  const emailOrUser = document.getElementById("email-user-input").value;
+  const password = document.getElementById("password-input").value;
 
   try {
-    const emailOrUser = document.getElementById("email-user-input").value;
-    const password = document.getElementById("password-input").value;
-
     console.log(emailOrUser, password);
 
     const data = {
