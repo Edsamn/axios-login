@@ -37,6 +37,8 @@ const userLogin = async (event) => {
       password,
     };
 
+    console.log(data);
+
     localStorage.setItem("loggedUsers", JSON.stringify(data));
     const loggedUsers = JSON.parse(localStorage.getItem("loggedUsers"));
     const response = await api.post("/login", loggedUsers);
