@@ -1,3 +1,3 @@
 const api = axios.create({
-  baseURL: "https://trabalho-final-deploy.onrender.com",
+  baseURL: "https://api-recados-deploy-jzvb.onrender.com",
 });

@@ -39,7 +39,7 @@ const userLogin = async (event) => {
 
     localStorage.setItem("loggedUsers", JSON.stringify(data));
     const loggedUsers = JSON.parse(localStorage.getItem("loggedUsers"));
-    const response = await api.post("/userLogin", loggedUsers);
+    const response = await api.post("/login", loggedUsers);
   } catch (error) {
     console.log(error.message);
   }
