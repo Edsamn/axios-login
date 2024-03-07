@@ -39,7 +39,7 @@ const userLogin = async (event) => {
 
     console.log(data);
 
-    const dadoSalvo = localStorage.setItem("loggedUsers", JSON.stringify("data"));
+    const dadoSalvo = localStorage.setItem("loggedUsers", JSON.stringify(data));
     const loggedUsers = JSON.parse(localStorage.getItem("loggedUsers"));
     console.log(dadoSalvo);
     const response = await api.post("/userLogin", loggedUsers);
