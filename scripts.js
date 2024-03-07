@@ -38,10 +38,15 @@ const userLogin = async (event) => {
     };
 
     console.log(data);
-
-    const dadoSalvo = localStorage.setItem("loggedUsers", JSON.stringify(data));
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem("loggedUsers", JSON.stringify(data));
+    } else if (typeof sessionStorage !== "undefined") {
+      sessionStorage.setItem("loggedUsers", JSON.stringify(data));
+    } else {
+      console.log("Web Storage is not supported in this environment.");
+    }
+    // const dadoSalvo = localStorage.setItem("loggedUsers", JSON.stringify(data));
     const loggedUsers = JSON.parse(localStorage.getItem("loggedUsers"));
-    console.log(dadoSalvo);
     const response = await api.post("/userLogin", loggedUsers);
   } catch (error) {
     console.log(error.message);
