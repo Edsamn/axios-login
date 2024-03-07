@@ -1,3 +1,3 @@
 const api = axios.create({
-  baseURL: "https://trabalho-final-intro-backend.onrender.com",
+  baseURL: "https://trabalho-final-deploy.onrender.com",
 });
