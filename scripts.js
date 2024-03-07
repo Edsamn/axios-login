@@ -38,14 +38,14 @@ const userLogin = async (event) => {
     };
 
     console.log(data);
-    // if (typeof localStorage !== "undefined") {
-    //   localStorage.setItem("loggedUsers", JSON.stringify(data));
-    // } else if (typeof sessionStorage !== "undefined") {
-    //   sessionStorage.setItem("loggedUsers", JSON.stringify(data));
-    // } else {
-    //   console.log("Web Storage is not supported in this environment.");
-    // }
-    localStorage.setItem("loggedUsers", JSON.stringify(data));
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem("loggedUsers", JSON.stringify(data));
+    } else if (typeof sessionStorage !== "undefined") {
+      sessionStorage.setItem("loggedUsers", JSON.stringify(data));
+    } else {
+      console.log("Web Storage is not supported in this environment.");
+    }
+    // localStorage.setItem("loggedUsers", JSON.stringify(data));
     const loggedUsers = JSON.parse(localStorage.getItem("loggedUsers"));
     const response = await api.post("/userLogin", loggedUsers);
   } catch (error) {
