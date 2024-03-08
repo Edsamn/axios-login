@@ -23,9 +23,10 @@ const createUser = async (event) => {
       email: email,
       pass: pass,
     };
-
+    localStorage.setItem("users", JSON.stringify(user));
+    JSON.parse(localStorage.getItem("users"));
     const response = await api.post("/createUser/crypto");
-    console.log(`Usuário criado com sucesso. ${user}`);
+    console.log(`Usuário criado com sucesso. ${response.data}`);
   } catch (error) {
     console.log(error.msg);
   }
