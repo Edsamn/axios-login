@@ -16,9 +16,16 @@ const createUser = async (event) => {
   try {
     const name = document.getElementById("create-name-input").value;
     const email = document.getElementById("create-email-user-input").value;
-    const password = document.getElementById("create-password-input").value;
+    const pass = document.getElementById("create-password-input").value;
+
+    const user = {
+      name: name,
+      email: email,
+      pass: pass,
+    };
 
     const response = await api.post("/createUser/crypto");
+    console.log(`Usuário criado com sucesso. ${user}`);
   } catch (error) {
     console.log(error.msg);
   }
@@ -26,19 +33,16 @@ const createUser = async (event) => {
 
 const userLogin = async (event) => {
   event.preventDefault();
-  const emailOrUser = document.getElementById("email-user-input").value;
-  const password = document.getElementById("password-input").value;
+  const email = document.getElementById("email-user-input").value;
+  const pass = document.getElementById("password-input").value;
 
   try {
-    console.log(emailOrUser, password);
-
-    const data = {
-      emailOrUser,
-      password,
+    const user = {
+      email: email,
+      pass: pass,
     };
 
-    console.log(data);
-    localStorage.setItem("loggedUsers", JSON.stringify(data));
+    localStorage.setItem("loggedUsers", JSON.stringify(user));
     const loggedUsers = JSON.parse(localStorage.getItem("loggedUsers"));
     const response = await api.post("/userLogin", loggedUsers);
   } catch (error) {
