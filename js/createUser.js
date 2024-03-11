@@ -6,6 +6,7 @@ const createUser = async (event) => {
     const email = document.getElementById("create-email-user-input").value;
     const pass = document.getElementById("create-password-input").value;
     const error = document.getElementById("error");
+    const success = document.getElementById("success");
 
     const user = {
       name: name,
@@ -13,25 +14,29 @@ const createUser = async (event) => {
       pass: pass,
     };
 
-    const usersSaved = JSON.parse(localStorage.getItem("users")) || [];
+    const users = [];
 
-    const emailIndex = usersSaved.findIndex((user) => email === user.email);
-
-    if (emailIndex === -1) {
-      usersSaved.push(user);
-      localStorage.setItem("users", JSON.stringify(user));
-    } else {
-      error.innerHTML = `Email já cadastrado`;
+    if (name === "" || email === "" || pass === "") {
+      error.innerHTML = `Os campos não podem ficar em branco`;
     }
 
-    const response = await api.post("/createUser/crypto", usersSaved);
+    users.push(user);
 
-    console.log(`Usuário criado com sucesso. ${response}`);
+    localStorage.setItem("users", JSON.stringify(users));
+    const usersSaved = JSON.parse(localStorage.getItem("users"));
+
+    const emailIndex = users.findIndex((user) => email === user.email);
+
+    if (emailIndex !== -1) {
+      return (error.innerHTML = `Email já cadastrado`);
+    } else {
+      const response = await api.post("/createUser/crypto", usersSaved);
+      success.innerHTML = `Usuário cadastrado com sucesso`;
+    }
 
     name.value = "";
     email.value = "";
     pass.value = "";
-    error.value = "";
   } catch (error) {
     console.log(error);
   }
