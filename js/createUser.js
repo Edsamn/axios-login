@@ -14,29 +14,14 @@ const createUser = async (event) => {
       pass: pass,
     };
 
-    const users = [];
-
     if (name === "" || email === "" || pass === "") {
-      error.innerHTML = `Os campos não podem ficar em branco`;
+      return (error.innerHTML = `Os campos não podem ficar em branco`);
     }
 
-    users.push(user);
-
-    localStorage.setItem("users", JSON.stringify(users));
-    const usersSaved = JSON.parse(localStorage.getItem("users"));
-
-    const emailIndex = users.findIndex((user) => email === user.email);
-
-    if (emailIndex !== -1) {
-      return (error.innerHTML = `Email já cadastrado`);
-    } else {
-      const response = await api.post("/createUser/crypto", usersSaved);
-      success.innerHTML = `Usuário cadastrado com sucesso`;
-    }
-
-    name.value = "";
-    email.value = "";
-    pass.value = "";
+    const response = await api.post("/createUser/crypto", user);
+    success.innerHTML = `Usuário cadastrado com sucesso`;
+    console.log(response);
+    location.href = "/html/login.html";
   } catch (error) {
     console.log(error);
   }
