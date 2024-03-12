@@ -15,11 +15,14 @@ const userLogin = async (event) => {
       return (error.innerHTML = `Favor preencher todos os campos`);
     }
 
-    const response = await api.post("/userLogin", user);
-    console.log(response);
-    success.innerHTML = `Login bem-sucedido`;
+    localStorage.setItem("Users", JSON.stringify(user));
+    const loggedUsers = JSON.parse(localStorage.getItem("Users"));
+
+    const response = await api.post("/userLogin", loggedUsers);
+    success.innerHTML = `Login bem-sucedido ${response.data.msg}`;
     location.href = "/html/comments.html";
+    localStorage.removeItem("Users");
   } catch (error) {
-    console.log(error);
+    error.innerHTML = `Erro ao fazer a requisição ${error.msg}`;
   }
 };
