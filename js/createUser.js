@@ -1,7 +1,3 @@
-// const getUsers = async () => {
-
-// };
-
 const createUser = async (event) => {
   event.preventDefault();
 
