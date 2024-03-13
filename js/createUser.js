@@ -1,6 +1,5 @@
 // const getUsers = async () => {
-//   const response = await api.get("/users");
-//   const users = response.data;
+
 // };
 
 const createUser = async (event) => {
@@ -19,10 +18,10 @@ const createUser = async (event) => {
       pass: pass,
     };
 
-    getUsers();
+    const getResponse = await api.get("/users");
+    const users = getResponse.data.data;
 
     const userAlreadyExists = users.find((user) => user.email === email);
-
     if (userAlreadyExists) {
       return (error.innerHTML = `Esse email já está cadastrado`);
     }
@@ -31,8 +30,8 @@ const createUser = async (event) => {
       return (error.innerHTML = `Os campos não podem ficar em branco`);
     }
 
-    const response = await api.post("/createUser/crypto", user);
-    success.innerHTML = `Usuário cadastrado com sucesso ${response.data.msg}`;
+    const postResponse = await api.post("/createUser/crypto", user);
+    success.innerHTML = `Usuário cadastrado com sucesso ${postResponse.data.msg}`;
     location.href = "/html/login.html";
   } catch (error) {
     error.innerHTML = `Erro ao fazer a requisição ${error.msg}`;
