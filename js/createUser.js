@@ -6,7 +6,6 @@ const createUser = async (event) => {
     const email = document.getElementById("create-email-user-input").value;
     const pass = document.getElementById("create-password-input").value;
     const error = document.getElementById("error");
-    const success = document.getElementById("success");
 
     const user = {
       name: name,
@@ -27,7 +26,7 @@ const createUser = async (event) => {
     }
 
     const postResponse = await api.post("/createUser/crypto", user);
-    success.innerHTML = `Usuário cadastrado com sucesso ${postResponse.data.msg}`;
+    alert(`${postResponse.data.msg}`);
     location.href = "/html/login.html";
   } catch (error) {
     error.innerHTML = `Erro ao fazer a requisição ${error.msg}`;
